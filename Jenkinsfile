@@ -18,7 +18,7 @@ pipeline {
         stage('Build Backend Services') {
             steps {
                 script {
-                    def services = ['faculty-service', 'report-service', 'config-server', 'eureka-server', 'zuul-service']
+                    def services = ['faculty', 'report', 'config', 'eureka', 'zuul']
                     services.each { service ->
                         dir(service) {
                             echo "Building ${service}..."
