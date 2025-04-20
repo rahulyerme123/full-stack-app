@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent {
+        lable 'Build-agent'
+    } 
+     
 
     tools {
         maven 'Maven 3.8.5'   // Adjust based on Jenkins configuration
