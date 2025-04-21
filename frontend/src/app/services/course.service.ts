@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Course } from '../models/Course';
+import { Course } from '../models/course';
 // comment added
 @Injectable()
 export class CourseService {
