@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog, PageEvent } from '@angular/material';
-import { Course } from '../../models/Course';
+import { Course } from '../../models/course';
 import { CourseService } from '../../services/course.service';
 import { Teacher } from '../../models/teacher';
 import { trigger, state, style, animate, transition } from '@angular/animations';

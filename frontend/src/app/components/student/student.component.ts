@@ -3,7 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog, PageEvent } from 
 import { Student } from '../../models/student';
 import { StudentService } from '../../services/student.service';
 import { StudentDialogComponent } from '../dialogs/student-dialog/student-dialog.component';
-import { Course } from '../../models/Course';
+import { Course } from '../../models/course';
 
 @Component({
   selector: 'app-student',

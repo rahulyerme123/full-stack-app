@@ -3,7 +3,7 @@ import { Student } from '../../../models/student';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StudentService } from '../../../services/student.service';
 import { CourseService } from '../../../services/course.service';
-import { Course } from '../../../models/Course';
+import { Course } from '../../../models/course';
 
 @Component({
   selector: 'app-student-dialog',
