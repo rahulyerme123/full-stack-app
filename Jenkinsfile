@@ -15,7 +15,7 @@ pipeline {
         stage('Build Backend Services') {
             steps {
                 script {
-                    def services = ['faculty', 'config', 'eureka', 'zuul']
+                    def services = ['faculty', 'spring-cloud-config', 'eureka', 'zuul']
                     services.each { service ->
                         dir(service) {
                             echo "Building ${service}..."
