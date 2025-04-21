@@ -3,22 +3,19 @@ pipeline {
         label 'Build-agent'
     } 
      
-
     tools {
         maven 'Maven 3.8.5'   // Adjust based on Jenkins configuration
     }
-
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/itundret/Angular-7-Spring-boot-2.1-microservices-PostgreSQL-10.git'
             }
         }
-
         stage('Build Backend Services') {
             steps {
                 script {
-                    def services = ['faculty', 'report', 'config', 'eureka', 'zuul']
+                    def services = ['faculty', 'config', 'eureka', 'zuul']
                     services.each { service ->
                         dir(service) {
                             echo "Building ${service}..."
