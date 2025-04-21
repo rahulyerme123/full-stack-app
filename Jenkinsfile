@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build Angular Frontend') {
             steps {
-                dir('angular-frontend') {
+                dir('frontend') {
                     sh 'npm install'
                     sh 'ng build --prod'
                 }
