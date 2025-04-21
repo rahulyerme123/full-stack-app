@@ -1,10 +1,14 @@
 pipeline {
     agent {
         label 'Build-agent'
-    } 
-     
+    }     
     tools {
         maven 'Maven 3.8.5'   // Adjust based on Jenkins configuration
+    }
+      environment {
+        ACR_NAME = 'microservicefullstackapp-bcckhqaadjgzc0bg.azurecr.io'        // Replace with your full ACR login server
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+        TENANT_ID = '8c3dad1d-b6bc-4f8b-939b-8263372eced6'                // Replace with your Azure Tenant ID
     }
     stages {
         stage('Build Backend Services') {
@@ -33,6 +37,36 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            }
+        }
+        stage('Login to Azure & ACR') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZ_CLIENT_ID', passwordVariable: 'AZ_CLIENT_SECRET')]) {
+                    sh '''
+                        echo "Logging in to Azure..."
+                        az login --service-principal -u $AZ_CLIENT_ID -p $AZ_CLIENT_SECRET --tenant $TENANT_ID
+                        
+                        echo "Logging into ACR..."
+                        ACR_SHORT_NAME=$(echo $ACR_NAME | cut -d'.' -f1)
+                        az acr login --name $ACR_SHORT_NAME
+                    '''
+                }
+            }
+        }
+        stage('Build & Push Docker Images') {
+            steps {
+                script {
+                    def services = ['faculty', 'spring-cloud-config', 'eureka', 'zuul']
+                    services.each { service ->
+                        dir(service) {
+                            echo "Building Docker image for ${service}..."
+                            sh "mvn dockerfile:build -Ddockerfile.repository=$ACR_NAME/${service} -Ddockerfile.tag=$IMAGE_TAG"
+
+                            echo "Pushing Docker image to ACR for ${service}..."
+                            sh "docker push $ACR_NAME/${service}:$IMAGE_TAG"
+                        }
+                    }
+                }
             }
         }
 
