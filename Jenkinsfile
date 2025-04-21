@@ -7,11 +7,6 @@ pipeline {
         maven 'Maven 3.8.5'   // Adjust based on Jenkins configuration
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/itundret/Angular-7-Spring-boot-2.1-microservices-PostgreSQL-10.git'
-            }
-        }
         stage('Build Backend Services') {
             steps {
                 script {
