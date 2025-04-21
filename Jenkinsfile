@@ -44,7 +44,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZ_CLIENT_ID', passwordVariable: 'AZ_CLIENT_SECRET')]) {
                     sh '''
                         echo "Logging in to Azure..."
-                        az login --service-principal -u $AZ_CLIENT_ID -p $AZ_CLIENT_SECRET --tenant $TENANT_ID
+                        az login --service-principal --username "$AZ_CLIENT_ID" --password "$AZ_CLIENT_SECRET" --tenant "$TENANT_ID"
                         
                         echo "Logging into ACR..."
                         ACR_SHORT_NAME=$(echo $ACR_NAME | cut -d'.' -f1)
