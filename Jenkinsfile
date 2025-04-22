@@ -33,6 +33,14 @@ pipeline {
                 }
             }
         }
+          stage('Build Frontend Docker Image') {
+            steps {
+                dir('frontend') {
+                    echo "Building Docker image for frontend..."
+                    sh 'docker build -t frontend:1.0 .'
+                }
+            }
+        }
 
         stage('Archive Artifacts') {
             steps {
@@ -53,10 +61,10 @@ pipeline {
                 }
             }
         }
-        stage('Build & Push Docker Images') {
+        stage('Tag & Push Docker Images') {
             steps {
                 script {
-                    def services = ['faculty', 'spring-cloud-config', 'eureka', 'zuul']
+                    def services = ['faculty', 'spring-cloud-config', 'eureka', 'zuul' , 'frontend']
                     services.each { service ->
                         def localImage = "${service}:1.0"
                         def acrImage = "${ACR_NAME}/${service}:${IMAGE_TAG}"
