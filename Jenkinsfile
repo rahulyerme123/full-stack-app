@@ -58,12 +58,14 @@ pipeline {
                 script {
                     def services = ['faculty', 'spring-cloud-config', 'eureka', 'zuul']
                     services.each { service ->
-                        dir(service) {
-                            echo "Building Docker image for ${service}..."
-                            sh "mvn dockerfile:build -Ddockerfile.repository=$ACR_NAME/${service} -Ddockerfile.tag=$IMAGE_TAG"
+                        def localImage = "${service}:1.0"
+                        def acrImage = "${ACR_NAME}/${service}:${IMAGE_TAG}"
 
-                            echo "Pushing Docker image to ACR for ${service}..."
-                            sh "docker push $ACR_NAME/${service}:$IMAGE_TAG"
+                        echo "Tagging ${localImage} as ${acrImage}"
+                        sh "docker tag ${localImage} ${acrImage}"
+
+                        echo "Pushing ${acrImage} to ACR..."
+                        sh "docker push ${acrImage}"
                         }
                     }
                 }
@@ -83,4 +85,4 @@ pipeline {
             echo 'Build failed!'
         }
     }
-}
+
