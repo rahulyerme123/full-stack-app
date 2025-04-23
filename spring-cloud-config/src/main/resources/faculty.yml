@@ -4,11 +4,11 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     initialization-mode: always
-    password: postgres
+    password: Fullstackapp@123
     platform: postgres
    #url: jdbc:postgresql://host.docker.internal:5432/faculty #docker
-    url: jdbc:postgresql://localhost:5432/faculty
-    username: postgres
+    url: jdbc:postgresql://helmfullstackdatabase.postgres.database.azure.com:5432/facultydb
+    username: Admin_pg
   jackson:
     serialization:
       fail-on-empty-beans: false
