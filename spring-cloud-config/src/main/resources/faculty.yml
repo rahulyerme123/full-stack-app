@@ -7,7 +7,7 @@ spring:
     password: Fullstackapp@123
     platform: postgres
    #url: jdbc:postgresql://host.docker.internal:5432/faculty #docker
-    url: jdbc:postgresql://helmfullstackdatabase.postgres.database.azure.com:5432/facultydb
+    url: jdbc:postgresql://helmfullstackdatabase.postgres.database.azure.com:5432/faculty
     username: Admin_pg
   jackson:
     serialization:
@@ -29,5 +29,5 @@ eureka:
     client:
       serviceUrl:
          #defaultZone: http://netflix-eureka:8761/eureka #docker
-          defaultZone: http://localhost:8761/eureka
+          defaultZone: http://eureka:8761/eureka
 
