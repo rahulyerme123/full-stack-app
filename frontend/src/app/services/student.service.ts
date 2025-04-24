@@ -7,7 +7,7 @@ import { Student } from '../models/student';
 @Injectable()
 export class StudentService {
 
-    private readonly API_URL = 'http://localhost:8765/faculty/student/';
+    private readonly API_URL = 'http://faculty:8765/faculty/student/';
 
     constructor(private httpClient: HttpClient) {
 

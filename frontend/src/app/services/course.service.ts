@@ -7,8 +7,8 @@ import { Course } from '../models/course';
 @Injectable()
 export class CourseService {
 
-    private readonly API_URL = 'http://localhost:8765/faculty/course/';
-    private readonly REPORT_URL = 'http://localhost:8765/report/studentsForCoursePdf/';
+    private readonly API_URL = 'http://faculty:8765/faculty/course/';
+    private readonly REPORT_URL = 'http://faculty:8765/report/studentsForCoursePdf/';
 
     constructor(private httpClient: HttpClient) {
 
