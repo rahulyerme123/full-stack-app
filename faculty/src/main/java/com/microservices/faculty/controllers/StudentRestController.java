@@ -37,6 +37,7 @@ public class StudentRestController {
 	private StudentRepository studentRepository;
 	
 	@ApiOperation("Returns all students from database")
+	@CrossOrigin(origins = "http://172.212.65.210")
 	@GetMapping("{filter}")
 	public Page<Student> getStudents(@PathVariable ("filter") String filter, @PageableDefault(sort = {"id"}) Pageable p, HttpServletRequest request){
 		System.out.println("GET Student "+
@@ -62,7 +63,7 @@ public class StudentRestController {
 	// insert
 	@ApiOperation("Insert student in database")
 	@PostMapping
-	@CrossOrigin
+	@CrossOrigin(origins = "http://172.212.65.210")
 	public ResponseEntity<Student> insertStudent(@RequestBody Student student) {
 		studentRepository.save(student);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -71,7 +72,7 @@ public class StudentRestController {
 	// update
 	@ApiOperation("Update student in database")
 	@PutMapping
-	@CrossOrigin
+	@CrossOrigin(origins = "http://172.212.65.210")
 	public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
 		if (!studentRepository.existsById(student.getId()))
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -80,7 +81,7 @@ public class StudentRestController {
 	}
 	@ApiOperation("Delete student from database")
 	@DeleteMapping("{id}")
-	@CrossOrigin
+	@CrossOrigin(origins = "http://172.212.65.210")
 	public ResponseEntity<Student> deleteStudent(@PathVariable("id") Integer id) {
 		if (!studentRepository.existsById(id))
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
